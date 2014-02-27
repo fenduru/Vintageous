@@ -320,6 +320,17 @@ class _enter_select_mode(ViWindowCommandBase):
         state = State(view)
         state.display_status()
 
+class _select_search_results(ViWindowCommandBase):
+    def run(self, mode=None, count=1):
+        self.state.enter_select_mode()
+
+        view = self.window.active_view()
+
+        view.sel().add_all(view.get_regions('vi_search'))
+
+        state = State(view)
+        state.display_status()
+
 
 class _enter_insert_mode(ViTextCommandBase):
     def run(self, edit, mode=None, count=1):
